@@ -85,6 +85,29 @@ async function connectToGame() {
 
         break
       }
+      case 'talkLocal': {
+        // expected format:
+        // ["talkLocal","Discord","Hello World!"]
+        /** @type {string} */
+        const name = json[1]
+        /** @type {string} */
+        const message = json[2].toLowerCase()
+        if (name === characterName) {
+          // console.log(`Message skipped, due to name "${name}" being the same as the bot's name`)
+          return
+        }
+
+        if (message.startsWith('hi') || message.startsWith('hello') || message.startsWith('hey')) {
+          ws.send(JSON.stringify([
+            'talkLocal',
+            {
+              m: `Hello ${name}, please don't hesitate to ask anything on Discord or prefix your message with a # to talk in global chat.`,
+            },
+          ]))
+        }
+
+        break
+      }
       default:
       // console.log(json)
     }
