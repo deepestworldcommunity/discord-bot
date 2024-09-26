@@ -114,6 +114,7 @@ async function connectToGame() {
   })
 
   ws.on('close', () => {
+    console.log('Disconnected from the game')
     setTimeout(connectToGame, 5000)
   })
 }
@@ -156,6 +157,18 @@ async function main() {
         m: `${message.author.globalName}: ${message.content}`,
       },
     ]))
+  })
+
+  client.on('debug', (info) => {
+    console.debug(`Discord client debug: ${info}`)
+  })
+
+  client.on('error', (error) => {
+    console.error(`Discord client error: ${error.message}`)
+  })
+
+  client.on('warn', (warning) => {
+    console.warn(`Discord client warning: ${warning}`)
   })
 }
 
