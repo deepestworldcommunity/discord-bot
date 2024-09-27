@@ -160,7 +160,7 @@ async function main() {
   })
 
   client.on('debug', (info) => {
-    console.debug(`Discord client debug: ${info}`)
+    // console.debug(`Discord client debug: ${info}`)
   })
 
   client.on('error', (error) => {
